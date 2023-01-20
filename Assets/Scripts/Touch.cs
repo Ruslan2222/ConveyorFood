@@ -26,22 +26,38 @@ public class Touch : MonoBehaviour
                 {
                     Orange orange;
                     orange = hit.transform.gameObject.GetComponent<Orange>();
-                    orange.Grab();
-                    _manScript.StartCoroutine(_manScript.PickUp(orange.interactionObject));
+
+                    if (orange.interactionObject)
+                    {
+                        orange.interactionObject.enabled = false;
+                        orange.Grab();
+                        _manScript.StartCoroutine(_manScript.PickUp(orange.interactionObject));
+                    }
                 }
                 else if (hit.transform.GetComponent<Pear>())
                 {
                     Pear pear;
                     pear = hit.transform.gameObject.GetComponent<Pear>();
-                    pear.Grab();
-                    _manScript.StartCoroutine(_manScript.PickUp(pear.interactionObject));
+
+                    if (pear.interactionObject.enabled)
+                    {
+                        pear.interactionObject.enabled = false;
+                        pear.Grab();
+                        _manScript.StartCoroutine(_manScript.PickUp(pear.interactionObject));
+                    }
+
                 }
                 else if (hit.transform.GetComponent<Pineapple>())
                 {
                     Pineapple pineapple;
                     pineapple = hit.transform.gameObject.GetComponent<Pineapple>();
-                    _manScript.StartCoroutine(_manScript.PickUp(pineapple.interactionObject));
-                    pineapple.Grab();
+
+                    if (pineapple.interactionObject.enabled)
+                    {
+                        pineapple.interactionObject.enabled = false;
+                        pineapple.Grab();
+                        _manScript.StartCoroutine(_manScript.PickUp(pineapple.interactionObject));
+                    }
                 }
 
             }
